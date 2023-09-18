@@ -5,11 +5,19 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import { useContext } from 'react';
+import { ScrollView } from 'react-native-gesture-handler';
+import { List } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/core';
 
+import CategoryList from '../../components/categoryList';
+import AppContext from "../../services/appContext"
 import HomeLogo from "app-restaurante/assets/home/home-logo.jpg";
 
-function CategoryScreen({ navigation }) {
+const CategoryScreen = ({ navigation }) => {
+  const { categories, setCategoryEdit } = useContext(AppContext);
+  let categoriesNotExcluded = categories.filter(c => !c.is_deleted)
+
   return (
     <>
     <View style={styles.container}>
@@ -41,6 +49,29 @@ function CategoryScreen({ navigation }) {
       </View>
 
       <Text style={styles.titulo}>Categorias</Text>
+
+
+      <View style={{ height: "100%" }}>
+      <ScrollView>
+        {categoriesNotExcluded.length ? (
+          categoriesNotExcluded.map((c, i) => (
+            <CategoryList key={i} category={c} navigation={navigation} />
+          ))
+        ) : (
+          <List.Subheader>Nenhuma Categoria Cadastrada</List.Subheader>
+        )}
+      </ScrollView>
+    </View>
+
+
+      <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={() => { setCategoryEdit(null); navigation.navigate('CreateCategoryScreen') }}
+          style={styles.touchableOpacityStyle}>
+          <Image source={require('../../../assets/icons/add-white-icon.png')}
+          style={styles.floatingButtonStyle}
+        />
+        </TouchableOpacity>
    
     </View>      
       
@@ -90,6 +121,27 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     textAlign: 'center',
     marginLeft: 135,
+  },
+  touchableOpacityStyle: {
+    position: 'absolute',
+    width: 50,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    right: 30,
+    bottom: 30,
+  },
+  floatingButtonStyle: {
+    resizeMode: 'contain',
+    width: 70,
+    height: 70,
+  },
+  buttonContainer: {
+    justifyContent: 'space-between'
+  },
+  divider: {
+    marginTop: 5,
+    marginBottom: 5
   },
 });
 

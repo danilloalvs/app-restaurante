@@ -1,5 +1,4 @@
 import {
-    SafeAreaView,
     StyleSheet,
     View,
     Image,
@@ -10,7 +9,7 @@ import { useNavigation } from '@react-navigation/core';
 
 import HomeLogo from "app-restaurante/assets/home/home-logo.jpg";
 
-function ProductScreen({ navigation }) {
+function CreateProductScreen({ navigation }) {
     return (
       <>
       <View style={styles.container}>
@@ -41,13 +40,13 @@ function ProductScreen({ navigation }) {
           </TouchableOpacity>
         </View>
   
-        <Text style={styles.titulo}>Produtos</Text>
+        <Text style={styles.titulo}>Cadastro de Produtos</Text>
 
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={() => navigation.navigate('CreateProductScreen')}
+          onPress={() => navigation.goBack()}
           style={styles.touchableOpacityStyle}>
-          <Image source={require('../../../assets/icons/add-white-icon.png')}
+          <Image source={require('../../../assets/icons/back-white-icon.png')}
           style={styles.floatingButtonStyle}
         />
         </TouchableOpacity>
@@ -65,7 +64,7 @@ function ProductScreen({ navigation }) {
     );
   }
 
-export default ProductScreen;
+export default CreateProductScreen;
 
 const styles = StyleSheet.create({
     container: {

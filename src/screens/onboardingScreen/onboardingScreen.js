@@ -39,12 +39,24 @@ const OnboardingScreen = ({navigation}) => {
           {
             backgroundColor: '#fdeb93',            
             image: <Image source={require('app-restaurante/assets/onboarding/onboarding-img.png')} />,
-            title: 'Bem vindo ao LariK!',
-            subtitle: 'Temos as melhores opções pra aquela hora da fome!',
+            title: <Text style={styles.customTitleStyle}>Bem vindo vindo ao nosso restaurante!</Text>,
+            subtitle: <Text style={styles.customSubtitleStyle}>Bateu a fome? Temos as melhores opções para você!</Text>,                            
           },
-        ]}
+        ]}       
       />
     );
 };
+
+const styles = StyleSheet.create({
+    customSubtitleStyle: {
+        marginTop: 30,
+        textAlign: 'center',
+        fontSize: 21,
+    },
+    customTitleStyle: {
+        textAlign: 'center',
+        fontSize: 35,
+    }
+})
 
 export default OnboardingScreen;
